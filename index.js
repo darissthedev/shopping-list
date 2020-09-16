@@ -1,35 +1,30 @@
-
 $(function(){
-
-    $("#js-shopping-list-form").submit(function(evt){
-        evt.preventDefault();
-        let listItem = $("#shopping-list-entry").val()
-        console.log(listItem)
-
-        let template = '<li>
-        <span class="shopping-item">apples</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-toggle">
-            <span class="button-label">check</span>
-          </button>
-          <button class="shopping-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>'
-
-      $("shopping-list").append(template)
-    })
-
-})
-
-    $(".shopping-list").on("click", "shopping-item-toggle", function(){
-        let title = $(this).parent().sibling();
-        title.addClass("shopping-item__checked")
-        console.log(title)
-    })
-
-    $(".shopping-list").on("click", "shopping-item-delete", function(){
-        let listItem = $(this).closet("li")
-        listItem.remove()
-    })
+    $('#js-shopping-list-form').submit(function(event) {
+      event.preventDefault();
+      const listItem = $('.js-shopping-list-entry').val();
+  
+      $('#shopping-list-entry').val('');
+  
+  
+      $('.shopping-list').append(
+        `<li>
+          <span class="shopping-item">${listItem}</span>
+          <div class="shopping-item-controls">
+            <button class="shopping-item-toggle">
+              <span class="button-label">check</span>
+            </button>
+            <button class="shopping-item-delete">
+              <span class="button-label">delete</span>
+            </button>
+          </div>
+        </li>`);
+    });
+  
+    $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
+      $(this).closest('li').remove();
+    });
+  
+    $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
+      $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+    });
+});
